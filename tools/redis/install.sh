@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # to-do check the existance of redis server
 REDIS_DIR=$MAIN_HOME/tools/redis/redis-6.2.4/
 if [ -f "$REDIS_DIR/src/redis-server" ]; then
@@ -6,7 +8,7 @@ if [ -f "$REDIS_DIR/src/redis-server" ]; then
 	$REDIS_DIR/src/redis-server $REDIS_DIR/../redis.conf --pidfile $REDIS_DIR/running.pid
 	exit 0
 fi
-pushd $MAIN_HOME/tools/redis/ > /dev/null
+pushd $MAIN_HOME/tools/redis/ >/dev/null
 # Prepare redis if the script is running for the first time
 wget https://www.cs.purdue.edu/homes/sishuai/sosp21/redis.tar.gz
 tar -zxvf redis.tar.gz
@@ -15,8 +17,8 @@ if [ ! -d "$REDIS_DIR" ]; then
 	exit 1
 fi
 
-cd $REDIS_DIR > /dev/null
-make -j`nproc`
+cd $REDIS_DIR >/dev/null
+make -j$(nproc)
 RES=$?
 if [ $RES -ne 0 ]; then
 	echo "[Error} failed to compile redis"
@@ -25,4 +27,4 @@ fi
 # start running redis server
 echo "Start running redis-server"
 $REDIS_DIR/src/redis-server $REDIS_DIR/../redis.conf --pidfile $REDIS_DIR/../running.pid
-popd > /dev/null
+popd >/dev/null

@@ -1,8 +1,10 @@
-DIR=$(dirname $BASH_SOURCE)
-echo $DIR
-export MAIN_HOME=$(realpath $DIR/../)
+#!/bin/bash
 
-# test prerequisite 
+CURR_DIR=$(pwd)
+export MAIN_HOME=$(dirname $CURR_DIR)
+echo $MAIN_HOME
+
+# test prerequisite
 export BASEIMAGE=$MAIN_HOME/testsuite/image/base-vm.img
 export SNAPSHOT=$MAIN_HOME/testsuite/image/snapshot.img
 export KERNEL_DIR=$MAIN_HOME/testsuite/kernel/linux-5.12-rc3/
