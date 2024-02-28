@@ -1,1 +1,10 @@
 tools/gcc/gcc*
+tools/redis/redis*
+tools/redis/running.pid
+*.tar.gz
+*.mak
+*.pyc
+vmm/install
+storage/
+testsuite/
+data/pmc

@@ -1,5 +1,10 @@
+#!/bin/bash
+
 # $1: start id
 # $2: end id
+
+source $HOME/snowboard/scripts/setup.sh 
+
 SB_OUTPUT_DIR="$SNOWBOARD_STORAGE/sequential-analysis-`date +'%Y-%m-%d-%H-%M-%S'`"
 #echo "dir not exists, creating $SB_OUTPUT_DIR"
 mkdir $SB_OUTPUT_DIR

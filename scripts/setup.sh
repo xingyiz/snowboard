@@ -12,9 +12,11 @@ set -e
 # sudo apt-get install gcc-multilib g++-multilib
 # pip3 install rq
 
+export PATH=$HOME/.local/bin:$PATH
+
 source common.sh
 
-export SNOWBOARD_STORAGE=$1
+export SNOWBOARD_STORAGE=$HOME/snowboard/storage
 # Compile gcc-5.4
 $MAIN_HOME/tools/gcc/install.sh
 RES=$?

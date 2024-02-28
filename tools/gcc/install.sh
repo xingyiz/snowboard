@@ -22,11 +22,12 @@ cp $MAIN_HOME/tools/gcc/download_prerequisites $GCC_DIR/contrib/
 ./contrib/download_prerequisites
 # patch gcc-5.4.0 because its code is ancient
 patch -p1 <../gcc-patch
+patch -p1 <../ustat-patch
 
 cd build
 # make distclean
 # rm ./config.cache
-../configure --prefix=$GCC_DIR/install/ -disable-nls --enable-languages=c,c++ -disable-multilib
+../configure --prefix=$GCC_DIR/install/ -disable-nls --enable-languages=c,c++ -disable-multilib --disable-libsanitizer
 RES=$?
 if [ $RES -ne 0 ]; then
 	echo "[Error] gcc configuration error $RES"

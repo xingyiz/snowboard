@@ -1,3 +1,5 @@
+#!/bin/bash
+
 SB_SOURCE_DIR=$MAIN_HOME/vmm/src
 pushd $MAIN_HOME/vmm/ > /dev/null
 # create a folder for installation
