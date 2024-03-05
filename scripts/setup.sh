@@ -55,6 +55,8 @@ if [ ! -d "$MAIN_HOME/testsuite/" ]; then
 fi
 popd >/dev/null
 # Download the kernel source code
+cp kernel_download.sh $MAIN_HOME/testsuite/kernel/download.sh
 $MAIN_HOME/testsuite/kernel/download.sh
+
 # Download the pmc data
 $MAIN_HOME/data/download-pmc.sh
