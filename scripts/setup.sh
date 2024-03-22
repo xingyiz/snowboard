@@ -13,6 +13,8 @@ set -e
 # pip3 install rq
 
 export PATH=$HOME/.local/bin:$PATH
+export GOROOT=$HOME/snowboard/testsuite/executor/goroot
+export PATH=$GOROOT/bin:$PATH
 
 source common.sh
 
@@ -56,6 +58,7 @@ fi
 popd >/dev/null
 # Download the kernel source code
 cp kernel_download.sh $MAIN_HOME/testsuite/kernel/download.sh
+
 $MAIN_HOME/testsuite/kernel/download.sh
 
 # Download the pmc data

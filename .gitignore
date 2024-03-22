@@ -6,5 +6,12 @@ tools/redis/running.pid
 *.pyc
 vmm/install
 storage/
-testsuite/
+testsuite/*/*
+!testsuite/executor/gopath
 data/pmc
+*.zip
+*programs*
+*input*
+generate/image/
+generate/kernel
+*.log
