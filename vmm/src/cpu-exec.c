@@ -16,6 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
+
+#include <time.h>
+
 #include "config.h"
 #include "cpu.h"
 #include "disas.h"
@@ -233,6 +236,8 @@ extern int ski_init_options_input_number[SKI_CPUS_MAX];
 extern int ski_init_options_cpu_1_mode;
 extern int ski_init_options_cpu_2_mode;
 
+clock_t time_taken = 0;
+
 // -------------------------------------------------------------------------------------------------
 // These two functions (ski_snapshot_reinitialize and ski_snapshot_reinitialize_cpu) contain 
 //   the code necessary to reinitialize our internal data structures when resuming from a snapshot.
@@ -393,6 +398,9 @@ void ski_first_in_test(CPUState* env){
 // Function called after the enter barrier (when not resuming from a snapshot) and from the execution cycle (when resuming from a snapshot)
 void ski_start_test(CPUState *env)
 {
+	printf("Time start: %d\n", time(NULL));
+	time_taken = clock();
+
 	ski_debug_print_config(env);
 	ski_exec_trace_print_initial_comment(env);
 
@@ -414,8 +422,14 @@ void ski_last_in_test(CPUState* env){
 	//No need to test if we're last, it's assumed/guaranteed that we are the last
 	SKI_TRACE("============================ LAST ==============================\n");
 
+	time_taken = clock() - time_taken;
+	double time_taken_sec = ((double)time_taken)/CLOCKS_PER_SEC;
+	printf("Time taken: %f\n", time_taken_sec);
+
+	char debug_str[256];
+	sprintf(debug_str, "Test finished. Time taken: %f\n", time_taken_sec);
 	// Reset the execution trace file
-	ski_exec_trace_print_comment((char *)"Test finished");
+	ski_exec_trace_print_comment((char *)debug_str);
 	ski_exec_trace_flush();
 	ski_exec_trace_stop(env);
 	SKI_ASSERT(0);

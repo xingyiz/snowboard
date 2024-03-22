@@ -10,7 +10,6 @@
  */
 
 
-
 #include "config.h"
 #include "cpu.h"
 #include "disas.h"
@@ -241,14 +240,17 @@ void ski_process_hypercall(CPUState *env){
             sprintf(filename, "%s/%d.data", ski_init_options_corpus_path, hio.p.hio_fetch_data.seed);
             //printf("SKI DEBUG DEBUG ======== %s ==============\n", filename);
             struct stat statbuf;
+            printf("SKI: Fetching data from %s\n", filename);
             stat(filename, &statbuf);
             if (statbuf.st_size > SKI_MAX_INPUT_SIZE){
                 // Simply skip this input if it is too large
+                printf("SKI: Input file too large, skipping\n");
                 hio.p.hio_fetch_data.size = 0;
                 break;
             }
             data_fd = fopen(filename, "r");
             if (data_fd == NULL){
+                printf("SKI: Could not open file %s\n", filename);
                 hio.p.hio_fetch_data.size = 0;
                 break;
             }
@@ -270,5 +272,3 @@ void ski_process_hypercall(CPUState *env){
             /*TODO: PF initialize the rest of the variables */
     }
 }
-
-
