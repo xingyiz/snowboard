@@ -43,6 +43,9 @@ def concurrent_executor(testcase_list, task_name, testing_mode):
         for addr_tmp in range(read_addr, read_addr + read_byte):
             read_addr_set.add(addr_tmp)
         addr_begin = min(list(write_addr_set & read_addr_set))
+        if str(testcase[9]) != str(testcase[10]):
+            print("Remove not the same testcase: ", testcase[9], ", ", testcase[10])
+            continue
         input1 += str(testcase[9]) +','
         input2 += str(testcase[10]) +','
         preemp1 += str(testcase[2]) +','

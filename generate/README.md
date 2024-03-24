@@ -26,3 +26,5 @@ cd performance
 ```
 make TARGETOS=linux TARGETARCH=386 -j`nproc`
 ```
+
+NOTE: Your generated `.data` file should not be more than 100KB in size. 
